@@ -15,19 +15,40 @@ Category.hasMany(Product, {
   onDelete: 'CASCADE',
 });
 
+// // Products belongToMany Tags (through ProductTag)
+// Product.belongsToMany(Tag, {
+//   through: "product_tag",
+//   as: "tag",
+//   foreignKey: "product_id",
+// });
+
+// // Tags belongToMany Products (through ProductTag)
+// Tag.belongsToMany(Product, {
+//   through: "product_tag",
+//   as: "tag",
+//   foreignKey: "tag_id",
+// });
+
 // Products belongToMany Tags (through ProductTag)
 Product.belongsToMany(Tag, {
-  through: "product_tag",
-  as: "tag",
-  foreignKey: "product_id",
+  through: { 
+    model: ProductTag,
+    unique: false
+  },
+  as: 'product_tags'
 });
 
 // Tags belongToMany Products (through ProductTag)
 Tag.belongsToMany(Product, {
-  through: "product_tag",
-  as: "tag",
-  foreignKey: "tag_id",
+  through: { 
+    model: ProductTag,
+    unique: false
+  },
+  as: 'tag_products'
 });
+
+
+
 
 
 module.exports = {
